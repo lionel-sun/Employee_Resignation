@@ -60,6 +60,8 @@ lr = LogisticRegression(solver='liblinear', multi_class='auto') #数据集比较
 lr.fit(train_x, train_y)
 print('LR准确率(基于训练集)： %.4lf' % lr.score(train_x, train_y))
 print('LR训练集cross_val_score准确率为 %.4lf' % np.mean(cross_val_score(lr, train_x, train_y, cv=10)))
+predict_lr = lr.predict(test_x)
+#pd.DataFrame(predict_lr, columns=['predictions']).to_csv('predict_lr.csv')
 
 # 创建线性 CART决策树分类器
 model = DecisionTreeClassifier()
@@ -72,6 +74,8 @@ model = LinearDiscriminantAnalysis(n_components=2)
 model.fit(train_x,train_y)
 print('LDA准确率(基于训练集)： %.4lf' % model.score(train_x, train_y))
 print('LDA训练集cross_val_score准确率为 %.4lf' % np.mean(cross_val_score(model, train_x, train_y, cv=10)))
+predict_lda = model.predict(test_x)
+#pd.DataFrame(predict_lda, columns=['predictions']).to_csv('predict_lda.csv')
 
 # 创建贝叶斯分类器
 model = GaussianNB()
@@ -112,4 +116,6 @@ print('XGBoost训练集cross_val_score准确率为 %.4lf' % np.mean(cross_val_sc
 # 使用TPOT自动机器学习工具对Titanic进行分类
 tpot = TPOTClassifier(generations=5, population_size=20, verbosity=2)
 tpot.fit(train_x, train_y)
-print('TPOT准确率(基于训练集)： %.4lf' % tpot.score(train_x, train_y))
+#print(tpot.score(train_x, train_y))
+predict_tpot = tpot.predict(test_x)
+pd.DataFrame(predict_tpot, columns=['predictions']).to_csv('predict_tpot.csv')
