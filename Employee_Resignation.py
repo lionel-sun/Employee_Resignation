@@ -19,9 +19,9 @@ import seaborn as sns
 # 加载数据
 train_data = pd.read_csv('train.csv')
 train_y = train_data['Attrition']
-train_x = train_data.drop(columns=['user_id', 'Attrition'])
+train_x = train_data.drop(columns=['user_id', 'Attrition', 'EmployeeNumber'])
 test_data = pd.read_csv('test.csv')
-test_x = test_data.drop(columns=['user_id'])
+test_x = test_data.drop(columns=['user_id', 'EmployeeNumber'])
 # 数据探索
 print('查看数据信息：列名、非空个数、类型等')
 print(train_data.info())
@@ -71,15 +71,19 @@ print('ID3决策树训练集cross_val_score准确率为 %.4lf' % np.mean(cross_v
 
 #predict_y = clf.predict(test_x)
 #print(predict_y)
-
+'''
 # 创建LR分类器 0.8784
 lr = LogisticRegression(solver='liblinear', multi_class='auto') #数据集比较小，使用liblinear，数据集大使用 sag或者saga
 lr.fit(train_x, train_y)
 print('LR准确率(基于训练集)： %.4lf' % lr.score(train_x, train_y))
 print('LR训练集cross_val_score准确率为 %.4lf' % np.mean(cross_val_score(lr, train_x, train_y, cv=10)))
 predict_lr = lr.predict(test_x)
+df1 = test_data
+df1['Attrition'] =predict_lr
+df1 = df1[['user_id', 'Attrition']].replace(['No','Yes'],[0,1])
+df1.to_csv('predict_lr.csv')
 #pd.DataFrame(predict_lr, columns=['predictions']).to_csv('predict_lr.csv')
-
+'''
 # 创建线性 CART决策树分类器
 model = DecisionTreeClassifier()
 model.fit(train_x,train_y)

@@ -141,4 +141,4 @@ cython_debug/
 .idea/
 
 # prediction result
-prediction.csv
+*.csv
