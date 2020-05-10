@@ -9,20 +9,16 @@
 - 测试集：test.csv
 
 ## 特征选择
+EmployeeNumber, Over18, Employee取值都一样直接删除掉。
 
+## 数据预处理
+- 使用onehot编码将离散型特征值转换为多列，使用lr预测的结果在leaderboard得分0.823
+- 将特征值替换为数值0，1，2，3...，使用lr预测在leaderboard得分0.829
+- 使用min-max规范化将所有特征值都映射到0-1之间
 
-todo list:
-去掉EmployeeNumber员工号码和预测无关
-
-去掉Over 18（超过18岁）都是一样的值StandardHours employee count
-
-
-需要数据可视化，onehot 编码后的查看L2P75重要特征。
-
-尝试高阶组合特征
-
-重写notebook
-
-分类器模型输出的是predict_proba(是该分类的概率所有值非负，线性输出结果)
-
-重写两种方法然后进行预测值
+## 模型训练与预测
+本部分说明都是采用离散特征值替换为数值的方法作为处理基础
+- LR
+使用LR模型默认参数和balanced采样的结果为0.829。
+- LightGBM
+使用GridSearchCV调整超参数，基于CPU运算。最好结果得分是0.838
