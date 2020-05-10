@@ -1,5 +1,4 @@
 # Employee Resignation Rate Predict 离职率预测
-回归问题（不是分类问题）
 ## 收集数据
 
 [Kaggle练习项目](https://www.kaggle.com/c/rs6-attrition-predict "kaggle链接")
