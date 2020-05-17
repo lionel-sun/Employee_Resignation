@@ -21,3 +21,6 @@ EmployeeNumber, Over18, Employee取值都一样直接删除掉。
 使用LR模型默认参数和balanced采样的结果为0.829。
 - LightGBM
 使用GridSearchCV调整超参数，基于CPU运算。最好结果得分是0.838
+
+## TODO（改进）：
+部分特征进行onehot,部分特征labelencode通过主管理解影响，互斥的特征做onehot。
